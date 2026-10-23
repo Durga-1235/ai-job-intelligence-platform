@@ -1,0 +1,6 @@
+job_title,company,location,description,salary
+Data Analyst,ABC Company,Chennai,"Looking for a Data Analyst with Python, SQL, Excel and Power BI skills",60000
+Data Scientist,XYZ Company,Bangalore,"Looking for a Data Scientist with Python, Machine Learning, NLP and SQL skills",90000
+Python Developer,DEF Company,Hyderabad,"Looking for a Python Developer with Python, Django and REST API experience",70000
+ML Engineer,PQR Company,Chennai,"Looking for an ML Engineer with Python, Machine Learning and TensorFlow experience",85000
+Backend Developer,LMN Company,Bangalore,"Looking for a Backend Developer with Python, FastAPI and PostgreSQL experience",75000
