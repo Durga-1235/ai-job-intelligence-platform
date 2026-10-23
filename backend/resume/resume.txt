@@ -1,0 +1,6 @@
+
+Resume Skills:
+Python
+Machine Learning
+NLP
+TensorFlow
