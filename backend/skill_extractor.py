@@ -1,5 +1,8 @@
 import psycopg2
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 skills_list = [
     "Python",
@@ -31,7 +34,7 @@ connection = psycopg2.connect(
     port=5432,
     database="job_intelligence",
     user="postgres",
-    password=***REMOVED***
+    password=os.getenv("JobPlatform@2026project")
 )
 
 cursor = connection.cursor()

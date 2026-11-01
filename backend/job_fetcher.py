@@ -2,7 +2,10 @@ import requests
 import psycopg2
 import re
 import html
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 SKILL_KEYWORDS = [
     "Python", "SQL", "Excel", "Power BI", "Tableau",
@@ -49,11 +52,11 @@ def fetch_jobs():
     print("Fetched jobs:", len(jobs))
 
     connection = psycopg2.connect(
-        host="localhost",
-        port=5432,
-        database="job_intelligence",
-        user="postgres",
-        password="***REMOVED***"
+        host=os.getenv("DB_HOST"),
+        port=int(os.getenv("DB_PORT")),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD")
     )
 
     cursor = connection.cursor()
@@ -64,14 +67,12 @@ def fetch_jobs():
         for job in jobs:
             title = job.get("title") or "Unknown"
             company = job.get("company_name") or "Unknown"
-            location = job.get("candidate_required_location") or "Remote"
+            location = (
+                job.get("candidate_required_location") or "Remote"
+            )
 
             description = clean_description(job.get("description"))
-
-            # Extract skills from job title and description
             skills = extract_skills(title + " " + description)
-
-            # Do not guess missing salary information
             salary = None
 
             cursor.execute(
@@ -124,7 +125,6 @@ def fetch_jobs():
                 saved += 1
 
         connection.commit()
-
         print("New jobs saved:", saved)
         print("Existing jobs updated:", updated)
 

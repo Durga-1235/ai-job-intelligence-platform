@@ -4,7 +4,9 @@ import psycopg2
 from backend.job_matcher import recommendations
 from pypdf import PdfReader
 from io import BytesIO
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 app = FastAPI()
 
 app.add_middleware(
@@ -23,7 +25,8 @@ connection = psycopg2.connect(
     port=5432,
     database="job_intelligence",
     user="postgres",
-    password="***REMOVED***"
+    password=os.getenv("JobPlatform@2026project")
+
 )
 
 @app.get("/")

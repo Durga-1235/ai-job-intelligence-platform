@@ -1,6 +1,10 @@
 import pandas as pd
 import psycopg2
 import re
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 df = pd.read_csv("backend/data/jobs.csv")
 df["location"] = df["location"].str.strip().str.title()
 def clean_text(text):
@@ -41,7 +45,8 @@ connection = psycopg2.connect(
     port=5432,
     database="job_intelligence",
     user="postgres",
-    password="***REMOVED***"
+    password=os.getenv("JobPlatform@2026project")
+
 )
 
 print("PostgreSQL connected successfully!")
