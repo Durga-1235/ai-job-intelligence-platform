@@ -12,21 +12,21 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173"
-    ],
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://durga-ai-job-intelligence.netlify.app"
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 connection = psycopg2.connect(
-    host="localhost",
-    port=5432,
-    database="job_intelligence",
-    user="postgres",
-    password=os.getenv("JobPlatform@2026project")
-
+    host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT", "5432"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD")
 )
 
 @app.get("/")
